@@ -1,0 +1,6 @@
+playwright==1.42.0
+pytest==8.1.1
+pytest-playwright==0.4.4
+requests==2.31.0
+Appium-Python-Client==3.2.1
+allure-pytest==2.13.2

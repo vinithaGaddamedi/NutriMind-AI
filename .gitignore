@@ -1,0 +1,37 @@
+# Environments
+.venv/
+.venv_new/
+.venv_nutri/
+venv/
+ENV/
+env/
+.env
+
+# Node
+node_modules/
+dist/
+build/
+.npm
+.npm-cache/
+.cache/
+.eslintcache
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Test Reports
+reports/
+allure-results/
+allure-report/
+automation/reports/
+automation/allure-results/
+automation/allure-report/
+*.html
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
