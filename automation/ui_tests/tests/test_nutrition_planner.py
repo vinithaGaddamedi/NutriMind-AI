@@ -13,7 +13,7 @@ def test_generate_meal_plan(page):
 
     page.get_by_test_id("generate-btn").click()
 
-    page.wait_for_selector("text=Calories:")
+    page.wait_for_selector("text=kcal/day")
 
     assert page.locator("text=Monday").is_visible()
 
@@ -44,9 +44,7 @@ def test_ui_matches_api(page):
 
     page.get_by_test_id("generate-btn").click()
 
-    page.wait_for_selector("text=Monday")
-
-    # Ensure UI displays exactly what API returned
+    page.wait_for_selector("text=kcal/day")
     assert str(api_response["calories"]) in page.content()
 
 

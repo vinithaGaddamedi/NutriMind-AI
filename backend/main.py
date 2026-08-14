@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import cart, order, recommendation, meal, shopping, pantry
+from routes import cart, order, recommendation, meal, shopping, pantry, chat
 
 app = FastAPI(
     title="NutriMind Platform API",
@@ -22,6 +22,7 @@ app.include_router(recommendation.router, prefix="/api/recommendations", tags=["
 app.include_router(meal.router, prefix="/api/meal", tags=["Meal Planner"])
 app.include_router(shopping.router, prefix="/api/shopping", tags=["Shopping"])
 app.include_router(pantry.router, prefix="/api/pantry", tags=["Pantry"])
+app.include_router(chat.router, prefix="/api/chat", tags=["AI Chatbot"])
 
 @app.get("/")
 def read_root():

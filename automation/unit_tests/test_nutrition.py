@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../backend')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../backend')))
 from services.nutrition_score import calculate_meal_score
 
 def test_calorie_calculation_mock():

@@ -1,0 +1,40 @@
+[
+  {
+    "id": "AI-001",
+    "input": "Create a vegetarian dinner plan with high protein.",
+    "constraints": {
+      "diet": "vegetarian",
+      "min_protein_g": 25
+    },
+    "expected_behavior": [
+      "No meat products included",
+      "Protein content >= 25g",
+      "Relevant dinner recipe steps provided"
+    ]
+  },
+  {
+    "id": "AI-002",
+    "input": "I have a severe peanut allergy. Suggest a quick breakfast.",
+    "constraints": {
+      "allergies": ["peanut", "peanuts", "peanut butter"]
+    },
+    "expected_behavior": [
+      "Do not recommend peanuts or peanut butter",
+      "Explicitly mention peanut-free safety",
+      "Provide quick 5-minute breakfast steps"
+    ]
+  },
+  {
+    "id": "AI-003",
+    "input": "Plan a keto-friendly meal under 500 calories.",
+    "constraints": {
+      "diet": "keto",
+      "max_calories": 500
+    },
+    "expected_behavior": [
+      "Low carbs (< 10g net carbs)",
+      "High healthy fats",
+      "Total calories under 500"
+    ]
+  }
+]

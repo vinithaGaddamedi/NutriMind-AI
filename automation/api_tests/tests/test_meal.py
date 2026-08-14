@@ -1,5 +1,9 @@
+import sys
+import os
 import pytest
 import requests
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../backend')))
 
 BASE_URL = "http://localhost:8000/api/meal"
 
@@ -11,7 +15,7 @@ def test_bmr_calculation():
 
 def test_meal_plan_structure():
     from services.meal_service import generate_weekly_meal
-    plan = generate_weekly_meal("vegetarian", "weight_loss")
+    plan, _ = generate_weekly_meal("vegetarian", {"goal": "weight_loss"})
     assert "Monday" in plan
     assert "breakfast" in plan["Monday"]
 

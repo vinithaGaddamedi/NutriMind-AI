@@ -13,6 +13,7 @@ import FeatureDelivery from './pages/FeatureDelivery'
 import PantryScanner from './pages/Pantry'
 import OrderSuccess from './pages/OrderSuccess'
 import Orders from './pages/Orders'
+import ChatWidget from './components/ChatWidget'
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -110,6 +111,8 @@ function App() {
           <Route path="/orders" element={<Orders userId={userId} />} />
           <Route path="/order-success" element={<OrderSuccess />} />
         </Routes>
+
+        <ChatWidget userId={userId} />
       </main>
     </div>
   )

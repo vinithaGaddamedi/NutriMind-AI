@@ -8,12 +8,13 @@ def test_login_flow(page):
     login_page = LoginPage(page)
     login_page.login("testuser")
     # Verify navigation to products page
-    page.wait_for_url("**/products")
-    assert "products" in page.url
+    page.wait_for_url("**/dashboard")
+    assert "dashboard" in page.url
 
 def test_add_to_cart(page):
     login_page = LoginPage(page)
     login_page.login("testuser")
+    page.goto("http://localhost:5173/products")
     
     product_page = ProductPage(page)
     product_page.add_first_product_to_cart()

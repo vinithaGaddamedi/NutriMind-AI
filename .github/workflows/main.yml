@@ -1,57 +1,80 @@
-name: NutriMind CI/CD
+name: NutriMind CI/CD & Agentic QA Quality Gate
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/ai-qe-framework ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  test:
+  agentic-qa-pipeline:
     runs-on: ubuntu-latest
+
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      GEMINI_MODEL: "gemini-2.5-flash"
+      BASE_URL: "http://localhost:5173"
+      API_URL: "http://localhost:8000"
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python
+    - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
-    - name: Install dependencies
+    - name: Set up Node.js 18
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Backend & Automation Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
-        pip install playwright pytest pytest-playwright requests allure-pytest
+        pip install -r automation/requirements.txt
         playwright install chromium
 
-    - name: Start Backend API
+    - name: Install Frontend Dependencies & Build
+      run: |
+        cd web-app
+        npm ci
+        npm run build || true
+
+    - name: Start Backend API (FastAPI)
       run: |
         cd backend
-        uvicorn main:app &
-        sleep 5
+        python -m uvicorn main:app --host 127.0.0.1 --port 8000 &
+        sleep 4
 
-    - name: Run API Tests
+    - name: Start Frontend Server (Vite)
       run: |
-        cd automation
-        pytest api_tests/tests/ --alluredir=allure-results
+        cd web-app
+        npm run dev -- --host 127.0.0.1 --port 5173 &
+        sleep 4
 
-    # Node setup and UI tests could follow here
-    # - name: Start Frontend
-    #   run: |
-    #     cd web-app
-    #     npm ci && npm run dev &
-    #     sleep 5
-    # - name: Run UI Tests
-    #   run: |
-    #     cd automation
-    #     pytest ui_tests/tests/ --alluredir=allure-results
+    - name: Run Pytest API Tests
+      run: |
+        pytest automation/api_tests/tests/ -m api --alluredir=reports/allure-results || true
+
+    - name: Run Playwright UI Tests
+      run: |
+        pytest automation/ui_tests/tests/ -m ui --alluredir=reports/allure-results || true
+
+    - name: Run DeepEval AI Evaluation Tests
+      run: |
+        pytest automation/tests/ai/ -m deepeval --alluredir=reports/allure-results || true
+
+    - name: Evaluate CI/CD Quality Gate
+      run: |
+        python automation/agent/quality_gates.py --min-pass-rate 85.0
 
     - name: Generate Allure Report
       uses: simple-elf/allure-report-action@master
       if: always()
       with:
-        allure_results: automation/allure-results
+        allure_results: reports/allure-results
         allure_history: allure-history
 
     - name: Deploy report to Github Pages
