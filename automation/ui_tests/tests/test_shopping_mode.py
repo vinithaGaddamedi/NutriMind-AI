@@ -9,19 +9,19 @@ def test_grocery_display(page):
 
     page.wait_for_selector("text=Grains")
 
-    assert page.locator("text=Rice").is_visible()
+    assert page.locator("text=\"Brown Rice\"").is_visible()
 
 
 def test_pantry_removal(page):
     page.goto("http://localhost:5173/shopping")
 
-    page.fill("input[name='pantry']", "Rice")
+    page.fill("input[name='pantry']", "Brown Rice")
 
     page.click("text=Generate Plan")
 
     page.wait_for_selector("text=Total: $")
     
-    assert not page.locator("text=Rice").is_visible()
+    assert not page.locator("text=\"Brown Rice\"").is_visible()
 
 
 def test_budget_limit(page):

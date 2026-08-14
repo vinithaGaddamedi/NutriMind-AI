@@ -3,13 +3,15 @@ from pytest_bdd import scenario, given, when, then
 import requests
 import allure
 
+from pytest_bdd import scenario, given, when, then, parsers
+
 BASE_URL = "http://localhost:8000/api"
 
 @scenario('../features/nutrition.feature', 'Validate nutrition calculation based on goals')
 def test_nutrition_logic():
     pass
 
-@given('a user profile with age "<age>", weight "<weight>", height "<height>", gender "<gender>", and goal "<goal>"', target_fixture="user_profile")
+@given(parsers.parse('a user profile with age "{age}", weight "{weight}", height "{height}", gender "{gender}", and goal "{goal}"'), target_fixture="user_profile")
 def user_profile(age, weight, height, gender, goal):
     return {
         "name": "TestUser",
@@ -30,7 +32,7 @@ def request_meal_plan(user_profile):
     assert response.status_code == 200, f"API failed with {response.text}"
     return response.json()
 
-@then('the calculated calories should be around "<expected_calories>"')
+@then(parsers.parse('the calculated calories should be around "{expected_calories}"'))
 def verify_calories(request_meal_plan, expected_calories):
     actual_cal = request_meal_plan["calories"]
     expected = int(expected_calories)

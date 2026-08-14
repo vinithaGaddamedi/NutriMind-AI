@@ -6,3 +6,4 @@ pydantic-settings>=2.2.1
 python-multipart
 python-jose[cryptography]
 passlib[bcrypt]
+google-genai>=0.1.0

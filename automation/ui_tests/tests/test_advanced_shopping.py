@@ -10,6 +10,9 @@ def test_store_route_and_price_comparison(page):
     # Generate plan
     page.click("data-testid=generate-plan")
     
+    # Switch to In-Store Shopping Mode
+    page.click("text=In-Store Shopping")
+    
     # Wait for route optimization headers (e.g., Aisle-by-Aisle Route)
     page.wait_for_selector("text=Aisle-by-Aisle Route")
     
