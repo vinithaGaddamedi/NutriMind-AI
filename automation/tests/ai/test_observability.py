@@ -3,7 +3,7 @@ import sys
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
-from agents.schemas.observability_schemas import AIObservabilityRecord
+from agents.infrastructure.schemas.observability_schemas import AIObservabilityRecord
 from automation.utils.observability_tracker import AIObservabilityTracker
 
 def test_observability_aggregation(tmp_path):

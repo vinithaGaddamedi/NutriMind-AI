@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../.
 from automation.utils.golden_validator import validate_agent_golden_dataset
 from automation.utils.ai_test_oracle import AITestOracle
 
-AGENT_GOLDENS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../test_data/ai/goldens/agents'))
+AGENT_GOLDENS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../ai_testing/golden_datasets/agents'))
 
 @pytest.fixture(scope="module")
 def agent_goldens():

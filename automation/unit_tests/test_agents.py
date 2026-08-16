@@ -5,12 +5,12 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from unittest.mock import MagicMock
 from agents.shift_left.requirement_agent import RequirementAgent
-from agents.schemas.requirement_schema import RequirementAnalysis
+from agents.infrastructure.schemas.requirement_schema import RequirementAnalysis
 from agents.shift_left.risk_agent import RiskAgent
 from agents.shift_left.test_design_agent import TestDesignAgent
 from agents.intelligence.failure_agent import FailureAgent
-from agents.automation.healer_agent import HealerAgent as SelfHealingPatchAgent
-from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
+from agents.automation.self_healing_agent import SelfHealingPatchAgent
+from agents.infrastructure.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 
 @pytest.fixture
 def mock_gateway():
@@ -123,6 +123,7 @@ def test_failure_agent_success(mock_gateway):
         "test_case_id": "TC-01",
         "failure_type": "LOCATOR_FAILURE",
         "root_cause": "Button ID changed",
+        "evidence": "Selector button#submit did not match any elements",
         "confidence": 0.95,
         "recommended_action": "Update locator",
         "requires_human_review": True

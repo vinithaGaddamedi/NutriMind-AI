@@ -8,11 +8,11 @@ from deepeval.metrics import AnswerRelevancyMetric, FaithfulnessMetric, Hallucin
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.gemini_eval_model import GeminiEvalModel
-from utils.deterministic_validator import DeterministicValidator
+from ai_testing.validators.deterministic_validator import DeterministicValidator
 from utils.ai_test_oracle import AITestOracle
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../agents')))
-from schemas.evaluation_schemas import ChatbotGolden
+from agents.infrastructure.schemas.evaluation_schemas import ChatbotGolden
 
 class UnifiedEvaluator:
     def __init__(self, thresholds_path: str = None):

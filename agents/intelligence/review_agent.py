@@ -2,9 +2,9 @@ import logging
 import json
 
 from agents.base_agent import BaseAgent
-from agents.schemas.base_agent_schema import AgentInput, AgentOutput
-from agents.schemas.execution_schemas import AutomationTest
-from agents.schemas.qa_schemas import ReviewAnalysis
+from agents.infrastructure.schemas.base_agent_schema import AgentInput, AgentOutput
+from agents.infrastructure.schemas.execution_schemas import AutomationTest
+from agents.infrastructure.schemas.qa_schemas import ReviewAnalysis
 
 logger = logging.getLogger("ReviewAgent")
 

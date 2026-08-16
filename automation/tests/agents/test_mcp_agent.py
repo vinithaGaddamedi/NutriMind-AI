@@ -4,7 +4,7 @@ import os
 from playwright.sync_api import sync_playwright
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
-from agents.infrastructure.mcp_playwright_agent import MCPPlaywrightAgent
+from mcp.tools.mcp_playwright_agent import MCPPlaywrightAgent
 
 @pytest.fixture(scope="module")
 def browser_page():

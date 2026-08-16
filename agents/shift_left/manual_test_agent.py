@@ -11,9 +11,9 @@ except ImportError:
     PANDAS_AVAILABLE = False
 
 from agents.base_agent import BaseAgent
-from agents.schemas.base_agent_schema import AgentInput, AgentOutput
-from agents.schemas.qa_schemas import TestScenario, ScenariosListModel
-from agents.schemas.execution_schemas import ManualTestCase, ManualTestCasesListModel
+from agents.infrastructure.schemas.base_agent_schema import AgentInput, AgentOutput
+from agents.infrastructure.schemas.qa_schemas import TestScenario, ScenariosListModel
+from agents.infrastructure.schemas.execution_schemas import ManualTestCase, ManualTestCasesListModel
 
 logger = logging.getLogger("ManualTestAgent")
 

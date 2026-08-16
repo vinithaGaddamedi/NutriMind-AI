@@ -3,7 +3,7 @@ import sys
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
-from agents.schemas.prompt_schemas import PromptVersion, QualityMetrics, PromptStatus
+from agents.infrastructure.schemas.prompt_schemas import PromptVersion, QualityMetrics, PromptStatus
 from automation.utils.prompt_regression_runner import PromptRegressionRunner
 
 def test_prompt_regression_runner_pass():

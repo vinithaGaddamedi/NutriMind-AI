@@ -5,7 +5,7 @@ from google import genai
 from google.genai import types
 from google.genai.errors import APIError
 from agents.providers.base_provider import AIProvider
-from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
+from agents.infrastructure.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 import time
 import uuid
 

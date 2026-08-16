@@ -6,8 +6,8 @@ from typing import Dict, Any
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from agents.base_agent import BaseAgent
-from agents.schemas.base_agent_schema import AgentInput, AgentOutput
-from agents.schemas.optimization_schemas import OptimizationInput, OptimizationReport
+from agents.infrastructure.schemas.base_agent_schema import AgentInput, AgentOutput
+from agents.infrastructure.schemas.optimization_schemas import OptimizationInput, OptimizationReport
 
 logger = logging.getLogger("TestOptimizationAgent")
 

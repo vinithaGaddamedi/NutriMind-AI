@@ -5,7 +5,7 @@ import json
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
 from agents.intelligence.test_optimization_agent import TestOptimizationAgent
-from agents.schemas.optimization_schemas import OptimizationInput, TestMetadata, OptimizationReport, TestSuiteSelection, SelectedTest
+from agents.infrastructure.schemas.optimization_schemas import OptimizationInput, TestMetadata, OptimizationReport, TestSuiteSelection, SelectedTest
 from automation.utils.optimization_reporter import OptimizationReporter
 
 def test_optimization_agent_mock():

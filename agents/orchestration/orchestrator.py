@@ -16,7 +16,7 @@ from agents.intelligence.failure_agent import FailureAgent
 from agents.automation.self_healing_agent import SelfHealingPatchAgent
 from agents.shift_left.jira_agent import JiraAgent
 from agents.intelligence.reporting_agent import ReportingAgent
-from agents.infrastructure.mcp_server import NutriMindMCPServer
+from mcp.server.mcp_server import NutriMindMCPServer
 
 logger = logging.getLogger("NutriMindOrchestrator")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")

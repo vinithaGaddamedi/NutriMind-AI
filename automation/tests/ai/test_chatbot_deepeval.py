@@ -1,6 +1,6 @@
 import pytest
 import requests
-from tests.ai.metrics.dietary_compliance import DietaryComplianceMetric
+from automation.tests.ai.metrics.dietary_compliance import DietaryComplianceMetric
 
 CHAT_API_URL = "http://localhost:8000/api/chat/"
 

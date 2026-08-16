@@ -4,7 +4,7 @@ import os
 from pydantic import ValidationError
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../agents')))
-from schemas.evaluation_schemas import ChatbotGoldenDataset, AgentGoldenDataset
+from agents.infrastructure.schemas.evaluation_schemas import ChatbotGoldenDataset, AgentGoldenDataset
 
 def validate_golden_dataset(filepath: str) -> ChatbotGoldenDataset:
     """

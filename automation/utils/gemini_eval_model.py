@@ -8,7 +8,13 @@ class GeminiEvalModel(DeepEvalBaseLLM):
     def __init__(self, model_name: str = "gemini-2.5-flash", api_key: Optional[str] = None):
         self.model_name = model_name
         self.api_key = api_key or os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
-        self.client = genai.Client(api_key=self.api_key) if self.api_key else None
+        
+        is_valid = False
+        placeholders = ["placeholder", "your_key_here", "key_here", "your_api_key", "none"]
+        if self.api_key and not any(p in self.api_key.lower() for p in placeholders) and self.api_key.strip():
+            is_valid = True
+            
+        self.client = genai.Client(api_key=self.api_key) if is_valid else None
 
     def load_model(self):
         return self.client

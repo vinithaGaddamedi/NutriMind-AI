@@ -2,9 +2,9 @@ import pytest
 import json
 from unittest.mock import MagicMock
 from agents.shift_left.manual_test_agent import ManualTestAgent
-from agents.schemas.qa_schemas import ScenariosListModel, TestScenario
-from agents.schemas.execution_schemas import ManualTestCasesListModel, ManualTestCase
-from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
+from agents.infrastructure.schemas.qa_schemas import ScenariosListModel, TestScenario
+from agents.infrastructure.schemas.execution_schemas import ManualTestCasesListModel, ManualTestCase
+from agents.infrastructure.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 
 @pytest.fixture
 def mock_gateway():

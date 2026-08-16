@@ -1,12 +1,12 @@
 import pytest
 from unittest.mock import MagicMock, patch
-from agents.gateway.ai_gateway import AIGateway
-from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata, LLMRateLimitError, LLMTimeoutError
+from agents.providers.ai_gateway import AIGateway
+from agents.infrastructure.schemas.llm_schema import LLMResponse, LLMResponseMetadata, LLMRateLimitError, LLMTimeoutError
 from google.genai.errors import APIError
 
 @pytest.fixture
 def mock_factory():
-    with patch('agents.gateway.ai_gateway.AIProviderFactory.get_provider') as mock:
+    with patch('agents.providers.ai_gateway.AIProviderFactory.get_provider') as mock:
         yield mock
 
 def test_gateway_success(mock_factory):
@@ -31,7 +31,7 @@ def test_gateway_success(mock_factory):
     assert result.content == "Success Data"
     mock_provider.generate_text.assert_called_once()
 
-@patch('agents.gateway.ai_gateway.time.sleep')
+@patch('agents.providers.ai_gateway.time.sleep')
 def test_gateway_retry_on_rate_limit(mock_sleep, mock_factory):
     mock_provider = MagicMock()
     mock_factory.return_value = mock_provider
@@ -57,7 +57,7 @@ def test_gateway_retry_on_rate_limit(mock_sleep, mock_factory):
     assert mock_provider.generate_text.call_count == 2
     mock_sleep.assert_called_once() # Should have slept once
 
-@patch('agents.gateway.ai_gateway.time.sleep')
+@patch('agents.providers.ai_gateway.time.sleep')
 def test_gateway_exhaust_retries(mock_sleep, mock_factory):
     mock_provider = MagicMock()
     mock_factory.return_value = mock_provider

@@ -3,7 +3,7 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from agents.schemas.observability_schemas import AIObservabilityRecord, AIObservabilitySummary, AgentPerformance
+from agents.infrastructure.schemas.observability_schemas import AIObservabilityRecord, AIObservabilitySummary, AgentPerformance
 
 class AIObservabilityTracker:
     """

@@ -3,7 +3,7 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from agents.schemas.quality_gate_schemas import QualityGateInput, QualityGateDecision, QualityGateReport
+from agents.infrastructure.schemas.quality_gate_schemas import QualityGateInput, QualityGateDecision, QualityGateReport
 
 class QualityGateEvaluator:
     """

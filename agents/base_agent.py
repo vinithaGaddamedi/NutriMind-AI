@@ -3,9 +3,9 @@ import logging
 from typing import TypeVar, Type, Optional, Any, Generic
 from pydantic import BaseModel, ValidationError
 
-from agents.gateway.ai_gateway import AIGateway
-from agents.schemas.base_agent_schema import AgentInput, AgentOutput, AgentMetadata, AgentError
-from agents.schemas.llm_schema import LLMResponse, LLMProviderError, LLMRateLimitError, LLMTimeoutError
+from agents.providers.ai_gateway import AIGateway
+from agents.infrastructure.schemas.base_agent_schema import AgentInput, AgentOutput, AgentMetadata, AgentError
+from agents.infrastructure.schemas.llm_schema import LLMResponse, LLMProviderError, LLMRateLimitError, LLMTimeoutError
 
 T = TypeVar('T', bound=BaseModel)
 logger = logging.getLogger("BaseAgent")

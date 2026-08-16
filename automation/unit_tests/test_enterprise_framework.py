@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from automation.config.config import FrameworkConfig
-from agents.self_healing.healer import SelfHealingHealer
+from agents.automation.healer import SelfHealingHealer
 from automation.utils.data_loader import DataLoader
 from agents.intelligence.quality_gates import evaluate_quality_gate
 
@@ -25,7 +25,7 @@ class TestEnterpriseFramework(unittest.TestCase):
             self.assertEqual(selector, "button")
 
     def test_data_loader_csv(self):
-        csv_path = os.path.join(os.path.dirname(__file__), "..", "ui_tests", "data", "test_data.csv")
+        csv_path = os.path.join(os.path.dirname(__file__), "..", "..", "test_data", "test_data.csv")
         if os.path.exists(csv_path):
             rows = DataLoader.load_csv(csv_path)
             self.assertTrue(len(rows) >= 1)

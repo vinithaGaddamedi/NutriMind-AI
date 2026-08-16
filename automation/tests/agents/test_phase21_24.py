@@ -8,7 +8,7 @@ from automation.utils.mcp_evaluator import MCPEvaluator
 from agents.intelligence.failure_agent import FailureAgent
 from automation.utils.self_healing_service import SelfHealingService
 from agents.intelligence.golden_learning_agent import GoldenLearningAgent, stage_regression_golden
-from agents.schemas.evaluation_schemas import ChatbotGolden
+from agents.infrastructure.schemas.evaluation_schemas import ChatbotGolden
 
 def test_mcp_evaluator():
     evaluator = MCPEvaluator()

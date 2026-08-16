@@ -5,7 +5,7 @@ from typing import Dict, Any
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from agents.schemas.traceability_schemas import TraceabilityReport
+from agents.infrastructure.schemas.traceability_schemas import TraceabilityReport
 
 class RTMGenerator:
     """
