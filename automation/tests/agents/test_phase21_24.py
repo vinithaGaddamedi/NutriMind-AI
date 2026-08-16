@@ -5,9 +5,9 @@ import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
 from automation.utils.mcp_evaluator import MCPEvaluator
-from agents.failure_agent import FailureAgent
+from agents.intelligence.failure_agent import FailureAgent
 from automation.utils.self_healing_service import SelfHealingService
-from agents.golden_learning_agent import GoldenLearningAgent, stage_regression_golden
+from agents.intelligence.golden_learning_agent import GoldenLearningAgent, stage_regression_golden
 from agents.schemas.evaluation_schemas import ChatbotGolden
 
 def test_mcp_evaluator():

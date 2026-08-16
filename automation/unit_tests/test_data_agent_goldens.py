@@ -2,7 +2,7 @@ import pytest
 import json
 import os
 from unittest.mock import MagicMock
-from agents.data_agent import TestDataAgent
+from agents.intelligence.data_agent import TestDataAgent
 from agents.schemas.qa_schemas import ScenariosListModel, TestScenario
 from agents.schemas.execution_schemas import TestDataSetsListModel, TestDataSet
 from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata

@@ -3,7 +3,7 @@ import os
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
-from agents.traceability_agent import TraceabilityAgent
+from agents.intelligence.traceability_agent import TraceabilityAgent
 from agents.schemas.traceability_schemas import TraceabilityReport, CoverageMetrics, TraceabilityGaps, TraceNode
 from automation.utils.rtm_generator import RTMGenerator
 
