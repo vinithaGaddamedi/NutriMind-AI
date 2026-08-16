@@ -4,7 +4,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 from unittest.mock import MagicMock
-from agents.review_agent import ReviewAgent
+from agents.intelligence.review_agent import ReviewAgent
 from agents.schemas.execution_schemas import AutomationTest
 from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 

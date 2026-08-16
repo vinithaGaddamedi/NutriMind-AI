@@ -4,12 +4,12 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from unittest.mock import MagicMock
-from agents.requirement_agent import RequirementAgent
+from agents.shift_left.requirement_agent import RequirementAgent
 from agents.schemas.requirement_schema import RequirementAnalysis
-from agents.risk_agent import RiskAgent
-from agents.test_design_agent import TestDesignAgent
-from agents.failure_agent import FailureAgent
-from agents.self_healing_agent import SelfHealingPatchAgent
+from agents.shift_left.risk_agent import RiskAgent
+from agents.shift_left.test_design_agent import TestDesignAgent
+from agents.intelligence.failure_agent import FailureAgent
+from agents.automation.healer_agent import HealerAgent as SelfHealingPatchAgent
 from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 
 @pytest.fixture

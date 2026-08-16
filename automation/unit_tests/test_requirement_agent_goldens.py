@@ -2,7 +2,7 @@ import pytest
 import json
 import os
 from unittest.mock import MagicMock
-from agents.requirement_agent import RequirementAgent
+from agents.shift_left.requirement_agent import RequirementAgent
 from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 
 def load_goldens():

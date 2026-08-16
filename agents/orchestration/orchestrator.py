@@ -7,16 +7,16 @@ from typing import Dict, Any
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../automation")))
 
-from agents.requirement_agent import RequirementAgent
-from agents.risk_agent import RiskAgent
-from agents.test_design_agent import TestDesignAgent
-from agents.manual_test_agent import ManualTestAgent
-from agents.automation_agent import AutomationAgent
-from agents.failure_agent import FailureAgent
-from agents.self_healing_agent import SelfHealingPatchAgent
-from agents.jira_agent import JiraAgent
-from agents.reporting_agent import ReportingAgent
-from agents.mcp_server import NutriMindMCPServer
+from agents.shift_left.requirement_agent import RequirementAgent
+from agents.shift_left.risk_agent import RiskAgent
+from agents.shift_left.test_design_agent import TestDesignAgent
+from agents.shift_left.manual_test_agent import ManualTestAgent
+from agents.automation.automation_agent import AutomationAgent
+from agents.intelligence.failure_agent import FailureAgent
+from agents.automation.self_healing_agent import SelfHealingPatchAgent
+from agents.shift_left.jira_agent import JiraAgent
+from agents.intelligence.reporting_agent import ReportingAgent
+from agents.infrastructure.mcp_server import NutriMindMCPServer
 
 logger = logging.getLogger("NutriMindOrchestrator")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")

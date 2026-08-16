@@ -4,7 +4,7 @@ import pytest
 import json
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
-from agents.coverage_agent import CoverageAgent
+from agents.intelligence.coverage_agent import CoverageAgent
 from agents.schemas.coverage_schemas import CoverageReport, CoverageMetricsBreakdown, SeverityCoverage, CoverageGapRecommendation
 from automation.utils.coverage_reporter import CoverageReporter
 

@@ -2,7 +2,7 @@ import pytest
 import json
 import os
 from unittest.mock import MagicMock
-from agents.test_design_agent import TestDesignAgent
+from agents.shift_left.test_design_agent import TestDesignAgent
 from agents.schemas.requirement_schema import RequirementAnalysis
 from agents.schemas.qa_schemas import RiskAnalysis, RiskModel
 from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
