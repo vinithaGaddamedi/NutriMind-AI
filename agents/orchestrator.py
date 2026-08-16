@@ -57,34 +57,66 @@ class MasterOrchestrator:
         # 5. Automation Code Generation
         auto_code = self.auto_agent.generate_playwright_test(manual_tests[0])
 
-        # 6. Failure Analysis & Jira Defect Simulation
-        failure_analysis = self.failure_agent.classify_and_analyze(
-            test_name="test_meal_planner_001",
-            error_message="TimeoutError: Locator button:has-text('Proceed') not found",
-            stack_trace="Traceback line 42 in test_meal_planner.py",
-            page_dom="<div><button id='proceed-pantry'>Proceed to Pantry</button></div>"
-        )
+        # 6. Failure Analysis & Jira Defect Generation (Dynamic from Allure)
+        failure_analysis = None
+        patch_proposal = {"status": "NO_FAILURES_DETECTED"}
+        jira_defect = {"summary": "No defect created"}
+        
+        allure_dir = "automation/reports/allure-results"
+        failed_test = None
+        
+        if os.path.exists(allure_dir):
+            for fname in os.listdir(allure_dir):
+                if fname.endswith("-result.json"):
+                    try:
+                        with open(os.path.join(allure_dir, fname), "r") as f:
+                            data = json.load(f)
+                            if data.get("status") in ["failed", "broken"]:
+                                failed_test = data
+                                break
+                    except Exception:
+                        pass
+        
+        if failed_test:
+            error_message = failed_test.get("statusDetails", {}).get("message", "Unknown error")
+            stack_trace = failed_test.get("statusDetails", {}).get("trace", "No stack trace available")
+            test_name = failed_test.get("name", "Unknown test")
+            
+            logger.info("Failure detected in %s. Initiating RCA...", test_name)
+            
+            failure_analysis = self.failure_agent.classify_and_analyze(
+                test_name=test_name,
+                error_message=error_message,
+                stack_trace=stack_trace,
+                page_dom="DOM snapshot not available in JSON report"
+            )
+            
+            # Simple heuristic to extract locator if it's a locator failure
+            old_selector = "unknown_selector"
+            if "locator" in error_message.lower():
+                old_selector = error_message.split("Locator")[1].split("not found")[0].strip() if "Locator" in error_message else "unknown_selector"
 
-        patch_proposal = self.patch_agent.propose_patch(
-            file_path="automation/ui_tests/pages/locators/locators.py",
-            old_selector="button:has-text('Proceed')",
-            new_selector="button#proceed-pantry"
-        )
+            patch_proposal = self.patch_agent.propose_patch(
+                file_path="automation/ui_tests/pages/locators.py", # Heuristic path
+                old_selector=old_selector,
+                new_selector=old_selector + "_FIXED"
+            )
 
-        jira_defect = self.jira_agent.format_defect_payload(
-            story_id=story_id,
-            test_case_id=manual_tests[0]["test_case_id"],
-            environment="QA",
-            steps=manual_tests[0]["steps"],
-            expected=manual_tests[0]["expected_result"],
-            actual="Timeout waiting for proceed button",
-            analysis=failure_analysis
-        )
+            jira_defect = self.jira_agent.format_defect_payload(
+                story_id=story_id,
+                test_case_id=test_name,
+                environment="QA",
+                steps="Execute automated test",
+                expected="Test passes",
+                actual=error_message,
+                analysis=failure_analysis
+            )
 
         # 7. Generate All Reports
+        failure_analyses = [failure_analysis] if failure_analysis else []
         self.reporting_agent.generate_all_reports(
             manual_test_cases=manual_tests,
-            failure_analyses=[failure_analysis],
+            failure_analyses=failure_analyses,
             deepeval_metrics={"relevance": 0.94, "faithfulness": 0.91, "safety": 0.97, "diet_compliance": 0.99}
         )
 

@@ -1,0 +1,10 @@
+{
+    "answer_relevancy": 0.85,
+    "faithfulness": 0.90,
+    "hallucination": 0.90,
+    "role_adherence": 0.90,
+    "safety": 0.95,
+    "contextual_relevancy": 0.85,
+    "conversation_completeness": 0.85,
+    "turn_relevancy": 0.85
+}

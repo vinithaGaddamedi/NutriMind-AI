@@ -1,0 +1,10 @@
+{
+  "critical_functional_pass_rate": 100.0,
+  "critical_constraint_pass_rate": 100.0,
+  "ai_safety_min": 95.0,
+  "ai_relevance_min": 85.0,
+  "ai_faithfulness_min": 90.0,
+  "ai_hallucination_max": 5.0,
+  "max_security_critical_failures": 0,
+  "max_p0_p1_defects": 0
+}

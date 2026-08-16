@@ -1,0 +1,82 @@
+[
+  {
+    "id": "REQ-GOLDEN-01",
+    "type": "normal_story",
+    "input": {
+      "story_id": "MEAL-200",
+      "title": "User login with email",
+      "description": "As a registered user, I want to log in using my email and password so I can access my meal plans.",
+      "acceptance_criteria": "1. User must be able to enter email and password.\n2. Successful login redirects to dashboard.\n3. Invalid credentials show 'Invalid email or password' error.",
+      "comments": "Make sure we lock the account after 5 failed attempts."
+    },
+    "expected_behavior": [
+      "Identify explicit functional requirement for email/password login",
+      "Identify business rule for account lockout after 5 attempts",
+      "Preserve exact acceptance criteria"
+    ]
+  },
+  {
+    "id": "REQ-GOLDEN-02",
+    "type": "ambiguous_story",
+    "input": {
+      "story_id": "MEAL-201",
+      "title": "Fast page loading",
+      "description": "The meal plan generation page should load really fast so users don't get bored.",
+      "acceptance_criteria": "1. Page loads fast.\n2. Shows a spinner while loading.",
+      "comments": ""
+    },
+    "expected_behavior": [
+      "Identify ambiguity regarding what 'fast' means (no exact SLA)",
+      "Flag missing acceptance criteria around timeout limits",
+      "Classify performance requirement as non-functional"
+    ]
+  },
+  {
+    "id": "REQ-GOLDEN-03",
+    "type": "missing_acceptance_criteria",
+    "input": {
+      "story_id": "MEAL-202",
+      "title": "Export meal plan to PDF",
+      "description": "Users should be able to click a button to download their weekly meal plan as a PDF document.",
+      "acceptance_criteria": "",
+      "comments": "Design says the button should be top right."
+    },
+    "expected_behavior": [
+      "Flag missing acceptance criteria",
+      "Identify functional requirement for PDF generation",
+      "Identify UI dependency based on the comment"
+    ]
+  },
+  {
+    "id": "REQ-GOLDEN-04",
+    "type": "conflicting_requirements",
+    "input": {
+      "story_id": "MEAL-203",
+      "title": "Free tier restrictions",
+      "description": "Free tier users can only generate 3 meal plans per month. They cannot access premium recipes.",
+      "acceptance_criteria": "1. Free users cannot exceed 5 meal plans per month.\n2. Premium recipes are hidden from free users.",
+      "comments": "Wait, is it 3 or 5? We need to ask product."
+    },
+    "expected_behavior": [
+      "Identify conflict between description (3 plans) and AC (5 plans)",
+      "Log ambiguity or missing information",
+      "Extract premium recipe restriction as a business rule"
+    ]
+  },
+  {
+    "id": "REQ-GOLDEN-05",
+    "type": "security_sensitive",
+    "input": {
+      "story_id": "MEAL-204",
+      "title": "Store user dietary health data",
+      "description": "We need to store user allergies and medical dietary restrictions (like diabetes) in their profile.",
+      "acceptance_criteria": "1. Users can add medical conditions.\n2. System saves data to DB.",
+      "comments": "This data falls under HIPAA compliance."
+    },
+    "expected_behavior": [
+      "Identify security/compliance risks (HIPAA)",
+      "Identify non-functional requirements around data encryption/privacy",
+      "Extract business rule regarding medical condition storage"
+    ]
+  }
+]

@@ -1,0 +1,77 @@
+name: Nightly Pipeline - AI QA
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # 2 AM every day
+
+jobs:
+  heavy-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test-suite: [deepeval, security, mcp_tests]
+    
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      GEMINI_MODEL: "gemini-2.5-flash"
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+        pip install -r automation/requirements.txt
+        playwright install chromium
+
+    - name: Run DeepEval Semantics
+      if: matrix.test-suite == 'deepeval'
+      run: pytest automation/tests/ai/ -m deepeval --alluredir=reports/allure-results || true
+
+    - name: Run Security Tests
+      if: matrix.test-suite == 'security'
+      run: pytest automation/tests/security/ --alluredir=reports/allure-results || true
+
+    - name: Run MCP Tests
+      if: matrix.test-suite == 'mcp_tests'
+      run: pytest automation/tests/mcp/ --alluredir=reports/allure-results || true
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: nightly-results-${{ matrix.test-suite }}
+        path: reports/allure-results/
+        retention-days: 7
+
+  nightly-quality-gate:
+    needs: heavy-tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r automation/requirements.txt
+        
+    - name: Download Test Results
+      uses: actions/download-artifact@v4
+      with:
+        path: reports/allure-results/
+        merge-multiple: true
+        
+    - name: Run AI Quality Gate
+      run: |
+        python automation/utils/quality_gate.py || exit 1

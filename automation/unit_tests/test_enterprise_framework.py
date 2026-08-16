@@ -3,12 +3,12 @@ import sys
 import unittest
 from unittest.mock import MagicMock, patch
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-from config.config import FrameworkConfig
-from agent.self_healing.healer import SelfHealingHealer
-from utils.data_loader import DataLoader
-from agent.quality_gates import evaluate_quality_gate
+from automation.config.config import FrameworkConfig
+from agents.self_healing.healer import SelfHealingHealer
+from automation.utils.data_loader import DataLoader
+from agents.quality_gates import evaluate_quality_gate
 
 class TestEnterpriseFramework(unittest.TestCase):
 

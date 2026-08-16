@@ -6,6 +6,8 @@ from google import genai
 from google.genai import types
 from google.genai.errors import APIError
 
+from schemas.chat import UserContext
+
 logger = logging.getLogger("NutriMindAIChatService")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 
@@ -41,14 +43,25 @@ class AIChatService:
         self,
         message: str,
         conversation_id: Optional[str] = None,
-        user_context: Optional[Dict[str, Any]] = None
+        user_context: Optional[UserContext] = None
     ) -> Dict[str, str]:
         cid = conversation_id or f"conv-{uuid.uuid4().hex[:8]}"
         context_str = ""
         if user_context:
-            context_items = [f"{k}: {v}" for k, v in user_context.items() if v]
+            context_items = []
+            if user_context.dietary_preferences:
+                context_items.append(f"Dietary Preferences: {', '.join(user_context.dietary_preferences)}")
+            if user_context.allergies:
+                context_items.append(f"Allergies: {', '.join(user_context.allergies)}")
+            if user_context.pantry_items:
+                context_items.append(f"Pantry Items: {', '.join(user_context.pantry_items)}")
+            if user_context.budget:
+                context_items.append(f"Budget: ${user_context.budget}")
+            if user_context.goals:
+                context_items.append(f"Goals: {', '.join(user_context.goals)}")
+            
             if context_items:
-                context_str = f"\n[User Context: {', '.join(context_items)}]\n"
+                context_str = f"\n[User Context: {'; '.join(context_items)}]\n"
 
         prompt = f"{context_str}User Message: {message}"
 
@@ -132,14 +145,21 @@ class AIChatService:
         except APIError as api_err:
             logger.error("Gemini API Error in chat route: %s", str(api_err))
             return {
-                "response": f"⚠️ NutriMind AI Error: {str(api_err)}",
+                "response": "I'm currently experiencing high traffic or a temporary service disruption. Please try asking your question again in a moment.",
+                "conversation_id": cid,
+                "model": self.model_name
+            }
+        except TimeoutError as timeout_err:
+            logger.error("Timeout Error in chat route: %s", str(timeout_err))
+            return {
+                "response": "Your request took too long to process. Please try asking a shorter question or checking your connection.",
                 "conversation_id": cid,
                 "model": self.model_name
             }
         except Exception as err:
             logger.error("Unexpected error in chat route: %s", str(err))
             return {
-                "response": f"⚠️ Unexpected error processing your query: {str(err)}",
+                "response": "⚠️ An unexpected error occurred while processing your request. Please try again.",
                 "conversation_id": cid,
                 "model": self.model_name
             }

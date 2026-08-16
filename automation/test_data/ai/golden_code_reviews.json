@@ -1,0 +1,36 @@
+[
+  {
+    "id": "REVIEW-GOLDEN-01",
+    "type": "time_sleep_override",
+    "input": {
+      "automation_test": {
+        "test_case_id": "TC-101",
+        "story_id": "STORY-01",
+        "requirement_id": "REQ-01",
+        "scenario_id": "TS-01",
+        "code": "import time\ndef test_bad():\n    time.sleep(5)\n    assert True",
+        "framework": "playwright"
+      }
+    },
+    "expected_behavior": [
+      "If AI approves code with time.sleep, ReviewAgent deterministically rejects it."
+    ]
+  },
+  {
+    "id": "REVIEW-GOLDEN-02",
+    "type": "direct_locator_override",
+    "input": {
+      "automation_test": {
+        "test_case_id": "TC-102",
+        "story_id": "STORY-02",
+        "requirement_id": "REQ-02",
+        "scenario_id": "TS-02",
+        "code": "def test_bad(page):\n    page.locator('.login-btn').click()\n    assert True",
+        "framework": "playwright"
+      }
+    },
+    "expected_behavior": [
+      "If AI approves code with page.locator, ReviewAgent deterministically rejects it."
+    ]
+  }
+]
