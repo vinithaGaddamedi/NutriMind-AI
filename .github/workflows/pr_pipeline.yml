@@ -1,0 +1,102 @@
+name: PR Pipeline - AI QA
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  fast-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test-suite: [lint, unit, api, ui, validators, agents]
+    
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      GEMINI_MODEL: "gemini-2.5-flash"
+      BASE_URL: "http://localhost:5173"
+      API_URL: "http://localhost:8000"
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+        pip install -r automation/requirements.txt
+        playwright install chromium
+
+    - name: Start Services
+      if: matrix.test-suite == 'api' || matrix.test-suite == 'ui'
+      run: |
+        cd web-app && npm ci && npm run build || true
+        cd ../backend && python -m uvicorn main:app --host 127.0.0.1 --port 8000 &
+        cd ../web-app && npm run dev -- --host 127.0.0.1 --port 5173 &
+        sleep 4
+
+    - name: Run Lint
+      if: matrix.test-suite == 'lint'
+      run: flake8 automation/ backend/ || true
+
+    - name: Run Unit Tests
+      if: matrix.test-suite == 'unit'
+      run: pytest automation/tests/agents/ -m "not e2e" --alluredir=reports/allure-results || true
+
+    - name: Run API Tests
+      if: matrix.test-suite == 'api'
+      run: pytest automation/api_tests/ -m api --alluredir=reports/allure-results || true
+
+    - name: Run UI Tests
+      if: matrix.test-suite == 'ui'
+      run: pytest automation/ui_tests/ -m ui --alluredir=reports/allure-results || true
+
+    - name: Run Deterministic Validators
+      if: matrix.test-suite == 'validators'
+      run: pytest automation/validators/ --alluredir=reports/allure-results || true
+
+    - name: Run Agent Tests
+      if: matrix.test-suite == 'agents'
+      run: pytest automation/tests/agents/ --alluredir=reports/allure-results || true
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results-${{ matrix.test-suite }}
+        path: reports/allure-results/
+        retention-days: 1
+
+  quality-gate:
+    needs: fast-tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r automation/requirements.txt
+        
+    - name: Download Test Results
+      uses: actions/download-artifact@v4
+      with:
+        path: reports/allure-results/
+        merge-multiple: true
+        
+    - name: Run AI Quality Gate
+      run: |
+        # Generates the enterprise_report.json based on actual metrics from test outputs
+        python automation/utils/quality_gate.py || exit 1

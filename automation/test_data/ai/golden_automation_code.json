@@ -1,0 +1,42 @@
+[
+  {
+    "id": "AUTO-GOLDEN-01",
+    "type": "time_sleep_rejection",
+    "input": {
+      "test_case": {
+        "test_case_id": "TC-101",
+        "story_id": "STORY-01",
+        "requirement_id": "REQ-01",
+        "acceptance_criteria_id": "AC-01",
+        "risk_id": "NONE",
+        "scenario_id": "TS-01",
+        "title": "Sleep test",
+        "objective": "Test",
+        "preconditions": [],
+        "test_data": "None",
+        "steps": [],
+        "expected_result": "Success",
+        "priority": "Medium",
+        "severity": "Medium",
+        "test_type": "Functional",
+        "automation_candidate": true,
+        "golden_id": "NONE",
+        "ai_specific_test": false
+      },
+      "dataset": {
+        "dataset_id": "DS-01",
+        "scenario_id": "TS-01",
+        "description": "None",
+        "positive_data": [],
+        "negative_data": [],
+        "boundary_data": [],
+        "security_data": [],
+        "expected_validation_errors": [],
+        "pii_synthetic": true
+      }
+    },
+    "expected_behavior": [
+      "If AI generates code with time.sleep, it should fail validation"
+    ]
+  }
+]

@@ -1,0 +1,71 @@
+[
+  {
+    "id": "SCENARIO-GOLDEN-01",
+    "type": "security_prompt_injection",
+    "input": {
+      "req": {
+        "story_id": "MEAL-401",
+        "title": "AI Meal Chatbot",
+        "description": "Users can talk to the chatbot for meal suggestions."
+      },
+      "risk": {
+        "risks": [
+          {
+            "risk_id": "RSK-SEC-01",
+            "priority": "P0",
+            "severity": "Critical",
+            "description": "User injects malicious prompt to extract system prompts"
+          }
+        ]
+      }
+    },
+    "expected_behavior": [
+      "Generate scenario covering prompt injection",
+      "Scenario maps to risk RSK-SEC-01",
+      "Scenario priority escalates to Critical due to P0 risk"
+    ]
+  },
+  {
+    "id": "SCENARIO-GOLDEN-02",
+    "type": "duplicate_detection",
+    "input": {
+      "req": {
+        "story_id": "MEAL-402",
+        "title": "Login page",
+        "description": "Standard login."
+      },
+      "risk": {
+        "risks": []
+      }
+    },
+    "expected_behavior": [
+      "Deduplicate scenarios if LLM generates identical titles"
+    ]
+  },
+  {
+    "id": "SCENARIO-GOLDEN-03",
+    "type": "hallucination_boundary",
+    "input": {
+      "req": {
+        "story_id": "MEAL-403",
+        "title": "Nutrition facts",
+        "description": "Display nutrition facts."
+      },
+      "risk": {
+        "risks": [
+          {
+            "risk_id": "RSK-AI-02",
+            "priority": "P1",
+            "severity": "High",
+            "description": "AI hallucinates vitamins not present in food"
+          }
+        ]
+      }
+    },
+    "expected_behavior": [
+      "Generate scenario of type 'hallucination' or 'ai behavior'",
+      "Scenario maps to RSK-AI-02",
+      "Scenario priority is at least High"
+    ]
+  }
+]

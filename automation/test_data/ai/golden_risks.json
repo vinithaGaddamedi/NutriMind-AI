@@ -1,0 +1,53 @@
+[
+  {
+    "id": "RISK-GOLDEN-01",
+    "type": "allergy_safety",
+    "input": {
+      "story_id": "MEAL-301",
+      "title": "Peanut allergy support",
+      "description": "Users with a peanut allergy should not receive any recipes containing peanuts or peanut derivatives.",
+      "business_rules": ["Strictly exclude peanuts"],
+      "acceptance_criteria": [{"ac_id": "AC-01", "rule": "System prevents peanut recipes"}],
+      "risks": ["User has an allergic reaction"]
+    },
+    "expected_behavior": [
+      "Identify risk related to allergy violation",
+      "Set severity to Critical",
+      "Set priority to P0"
+    ]
+  },
+  {
+    "id": "RISK-GOLDEN-02",
+    "type": "hallucinated_nutrition",
+    "input": {
+      "story_id": "MEAL-302",
+      "title": "AI calorie breakdown",
+      "description": "The AI bot should tell the user the exact calorie breakdown of the food they ask about.",
+      "business_rules": ["Bot calculates macros"],
+      "acceptance_criteria": [{"ac_id": "AC-01", "rule": "Bot responds with calories"}],
+      "risks": []
+    },
+    "expected_behavior": [
+      "Identify AI/LLM risk category",
+      "Identify risk of hallucinated nutrition information",
+      "Set priority to at least P1"
+    ]
+  },
+  {
+    "id": "RISK-GOLDEN-03",
+    "type": "api_failure",
+    "input": {
+      "story_id": "MEAL-303",
+      "title": "Sync with fitness tracker API",
+      "description": "The app should pull step data from a 3rd party fitness tracker API every hour.",
+      "business_rules": ["Hourly sync"],
+      "acceptance_criteria": [{"ac_id": "AC-01", "rule": "Data syncs hourly"}],
+      "risks": []
+    },
+    "expected_behavior": [
+      "Identify integration risk",
+      "Identify API failure risk",
+      "Recommend API testing types"
+    ]
+  }
+]

@@ -1,0 +1,122 @@
+{
+  "goldens": [
+    {
+      "golden_id": "AGENT-REQ-01",
+      "agent_name": "RequirementAgent",
+      "input_data": {
+        "raw_text": "As a user, I want to create a meal plan so I can eat healthier."
+      },
+      "constraints": [
+        "Extract requirement strictly from the provided text",
+        "Maintain requirement traceability"
+      ],
+      "expected_behavior": "Generate a valid Requirement schema detailing the meal plan goal.",
+      "forbidden_behavior": [
+        "Inventing acceptance criteria not mentioned in the raw text",
+        "Inventing business rules"
+      ],
+      "severity": "high"
+    },
+    {
+      "golden_id": "AGENT-RISK-01",
+      "agent_name": "RiskAgent",
+      "input_data": {
+        "requirement_id": "REQ-123",
+        "description": "User sets a weekly calorie limit."
+      },
+      "constraints": [
+        "Identify security and edge case risks related to user input"
+      ],
+      "expected_behavior": "Identify risks such as negative calorie input or data overflow.",
+      "forbidden_behavior": [
+        "Hallucinating unrelated risks like network failure if not applicable"
+      ],
+      "severity": "medium"
+    },
+    {
+      "golden_id": "AGENT-TEST-DESIGN-01",
+      "agent_name": "TestDesignAgent",
+      "input_data": {
+        "requirement_id": "REQ-123",
+        "risks": ["Negative calorie input"]
+      },
+      "constraints": [
+        "Map test cases to requirement",
+        "Cover normal, edge, and negative cases"
+      ],
+      "expected_behavior": "Generate test cases including happy path and negative path for calorie limits.",
+      "forbidden_behavior": [
+        "Testing features outside the provided requirement"
+      ],
+      "severity": "high"
+    },
+    {
+      "golden_id": "AGENT-MANUAL-01",
+      "agent_name": "ManualTestAgent",
+      "input_data": {
+        "test_case_id": "TC-001",
+        "description": "Verify negative calorie input is rejected"
+      },
+      "constraints": [
+        "Write precise manual steps",
+        "Define expected results for each step"
+      ],
+      "expected_behavior": "Produce a step-by-step manual test script.",
+      "forbidden_behavior": [
+        "Inventing UI buttons or URLs that do not exist"
+      ],
+      "severity": "high"
+    },
+    {
+      "golden_id": "AGENT-AUTO-01",
+      "agent_name": "AutomationAgent",
+      "input_data": {
+        "test_case": "Verify successful login",
+        "framework": "playwright"
+      },
+      "constraints": [
+        "Generate valid Playwright Python code",
+        "Use provided POM if available"
+      ],
+      "expected_behavior": "Output valid executable Playwright code for login.",
+      "forbidden_behavior": [
+        "Inventing non-existent API endpoints",
+        "Inventing non-existent CSS selectors without evidence"
+      ],
+      "severity": "critical"
+    },
+    {
+      "golden_id": "AGENT-FAIL-01",
+      "agent_name": "FailureAgent",
+      "input_data": {
+        "error_log": "TimeoutError: selector '#login-btn' not found",
+        "code_snippet": "page.click('#login-btn')"
+      },
+      "constraints": [
+        "Analyze the error",
+        "Provide a concrete fix"
+      ],
+      "expected_behavior": "Identify that the selector might be wrong or page didn't load, suggest adding a wait or fixing the selector.",
+      "forbidden_behavior": [
+        "Blaming the error on irrelevant network issues without evidence"
+      ],
+      "severity": "high"
+    },
+    {
+      "golden_id": "AGENT-ORCH-01",
+      "agent_name": "Orchestrator",
+      "input_data": {
+        "user_request": "Automate the login flow"
+      },
+      "constraints": [
+        "Delegate to appropriate agents",
+        "Return a final structured plan"
+      ],
+      "expected_behavior": "Output a plan routing tasks to Requirement, TestDesign, and Automation agents.",
+      "forbidden_behavior": [
+        "Attempting to write Playwright code directly instead of delegating"
+      ],
+      "severity": "medium"
+    }
+  ]
+}

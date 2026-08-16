@@ -1,0 +1,52 @@
+[
+  {
+    "id": "DATA-GOLDEN-01",
+    "type": "security_injection_fallback",
+    "input": {
+      "scenarios": [
+        {
+          "scenario_id": "TS-SEC-01",
+          "requirement_id": "REQ-101",
+          "risk_id": "RSK-01",
+          "title": "SQL Injection Check",
+          "description": "Test login with SQLi",
+          "test_type": "security",
+          "priority": "High",
+          "preconditions": [],
+          "test_data": "None",
+          "expected_behavior": "Block SQLi",
+          "automation_candidate": true,
+          "golden_candidate": false
+        }
+      ]
+    },
+    "expected_behavior": [
+      "If AI forgets to add security_data to a security scenario, deterministic hook injects default payload"
+    ]
+  },
+  {
+    "id": "DATA-GOLDEN-02",
+    "type": "pii_violation",
+    "input": {
+      "scenarios": [
+        {
+          "scenario_id": "TS-PII-01",
+          "requirement_id": "REQ-102",
+          "risk_id": "RSK-02",
+          "title": "Test user profile",
+          "description": "Test profile creation",
+          "test_type": "functional",
+          "priority": "High",
+          "preconditions": [],
+          "test_data": "None",
+          "expected_behavior": "Profile created",
+          "automation_candidate": true,
+          "golden_candidate": false
+        }
+      ]
+    },
+    "expected_behavior": [
+      "If AI returns pii_synthetic=False, framework rejects it and overrides positive data with NEEDS_CLARIFICATION"
+    ]
+  }
+]
