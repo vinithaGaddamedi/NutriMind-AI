@@ -8,8 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../automation")))
 
 from agents.base_agent import BaseAgent
-from agents.schemas.base_agent_schema import AgentInput, AgentOutput
-from agents.schemas.qa_schemas import FailureAnalysis, FailureClassification
+from agents.infrastructure.schemas.base_agent_schema import AgentInput, AgentOutput
+from agents.infrastructure.schemas.qa_schemas import FailureAnalysis, FailureClassification
 
 logger = logging.getLogger("FailureAgent")
 

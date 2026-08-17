@@ -1,6 +1,6 @@
 import json
 from typing import Dict, Any
-from agents.schemas.prompt_schemas import PromptVersion, QualityMetrics, PromptRegressionReport, PromptStatus
+from agents.infrastructure.schemas.prompt_schemas import PromptVersion, QualityMetrics, PromptRegressionReport, PromptStatus
 
 class PromptRegressionRunner:
     """

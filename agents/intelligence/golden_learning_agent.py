@@ -6,8 +6,8 @@ from typing import Dict, Any, Optional
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from agents.base_agent import BaseAgent
-from agents.schemas.base_agent_schema import AgentInput, AgentOutput
-from agents.schemas.evaluation_schemas import ChatbotGolden
+from agents.infrastructure.schemas.base_agent_schema import AgentInput, AgentOutput
+from agents.infrastructure.schemas.evaluation_schemas import ChatbotGolden
 
 logger = logging.getLogger("GoldenLearningAgent")
 

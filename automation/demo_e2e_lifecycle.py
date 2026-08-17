@@ -34,7 +34,7 @@ def run_e2e_demo():
     
     orchestrator = AutomationOrchestrator()
     input_data = AutomationOrchestratorInput(
-        test_scenario="Verify peanut allergy is respected during meal generation.",
+        prompt="Plan", test_scenario="Verify peanut allergy is respected during meal generation.",
         acceptance_criteria=["Output must not contain peanuts"],
         original_requirement=STORY
     )

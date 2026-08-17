@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from unittest.mock import MagicMock
 from agents.shift_left.requirement_agent import RequirementAgent
-from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
+from agents.infrastructure.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 
 @pytest.fixture
 def mock_gateway():

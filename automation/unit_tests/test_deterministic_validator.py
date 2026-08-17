@@ -3,10 +3,10 @@ import sys
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.deterministic_validator import DeterministicValidator
+from ai_testing.validators.deterministic_validator import DeterministicValidator
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../agents')))
-from schemas.evaluation_schemas import GoldenContext
+from agents.infrastructure.schemas.evaluation_schemas import GoldenContext
 
 def test_validator_detects_peanut_allergy():
     context = GoldenContext(allergies=["peanut"])

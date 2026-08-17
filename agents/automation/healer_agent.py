@@ -1,14 +1,14 @@
 import json
 from agents.base_agent import BaseAgent
-from agents.schemas.healer_schemas import HealerInput, HealerOutput
-from agents.gateway.ai_gateway import AIGateway
+from agents.infrastructure.schemas.healer_schemas import HealerInput, HealerOutput
+from agents.providers.ai_gateway import AIGateway
 
 class HealerAgent(BaseAgent):
     """
     Answers: 'Can we safely repair the automation?'
     """
     def __init__(self):
-        super().__init__(name="HealerAgent", role="Self-Healing Expert")
+        super().__init__(agent_name="HealerAgent")
         self.gateway = AIGateway()
 
     def execute(self, input_data: HealerInput) -> HealerOutput:

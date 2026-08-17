@@ -3,9 +3,9 @@ import json
 from typing import List, Dict, Any
 
 from agents.base_agent import BaseAgent
-from agents.schemas.base_agent_schema import AgentInput, AgentOutput
-from agents.schemas.qa_schemas import ScenariosListModel
-from agents.schemas.execution_schemas import TestDataSetsListModel
+from agents.infrastructure.schemas.base_agent_schema import AgentInput, AgentOutput
+from agents.infrastructure.schemas.qa_schemas import ScenariosListModel
+from agents.infrastructure.schemas.execution_schemas import TestDataSetsListModel
 
 logger = logging.getLogger("TestDataAgent")
 

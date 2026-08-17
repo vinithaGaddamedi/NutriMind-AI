@@ -7,9 +7,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.golden_validator import validate_golden_dataset
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../agents')))
-from schemas.evaluation_schemas import ChatbotGoldenDataset
+from agents.infrastructure.schemas.evaluation_schemas import ChatbotGoldenDataset
 
-GOLDEN_FILE = os.path.join(os.path.dirname(__file__), '../test_data/ai/chatbot_goldens.json')
+GOLDEN_FILE = os.path.join(os.path.dirname(__file__), '../../ai_testing/golden_datasets/chatbot_goldens.json')
 
 def test_chatbot_golden_dataset_parses_successfully():
     """Verify that the master golden dataset is valid and has at least 30 items."""

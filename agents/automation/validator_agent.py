@@ -1,14 +1,14 @@
 import json
 from agents.base_agent import BaseAgent
-from agents.schemas.automation_schemas import ValidatorInput, ValidatorOutput
-from agents.gateway.ai_gateway import AIGateway
+from agents.infrastructure.schemas.automation_schemas import ValidatorInput, ValidatorOutput
+from agents.providers.ai_gateway import AIGateway
 
 class ValidatorAgent(BaseAgent):
     """
     Answers: 'Does the generated automation actually test the requirement?'
     """
     def __init__(self):
-        super().__init__(name="ValidatorAgent", role="Automation Quality Gate")
+        super().__init__(agent_name="ValidatorAgent")
         self.gateway = AIGateway()
 
     def execute(self, input_data: ValidatorInput) -> ValidatorOutput:

@@ -3,11 +3,11 @@ import json
 import os
 from unittest.mock import MagicMock
 from agents.shift_left.risk_agent import RiskAgent
-from agents.schemas.requirement_schema import RequirementAnalysis
-from agents.schemas.llm_schema import LLMResponse, LLMResponseMetadata
+from agents.infrastructure.schemas.requirement_schema import RequirementAnalysis
+from agents.infrastructure.schemas.llm_schema import LLMResponse, LLMResponseMetadata
 
 def load_goldens():
-    filepath = os.path.join(os.path.dirname(__file__), "..", "test_data", "ai", "golden_risks.json")
+    filepath = os.path.join(os.path.dirname(__file__), "..", "..", "ai_testing", "golden_datasets", "golden_risks.json")
     with open(filepath, "r") as f:
         return json.load(f)
 

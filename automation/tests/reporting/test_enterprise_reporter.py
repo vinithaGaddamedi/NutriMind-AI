@@ -3,7 +3,7 @@ import sys
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
-from agents.schemas.enterprise_report_schemas import ConsolidatedReport, ExecutiveSummary
+from agents.infrastructure.schemas.enterprise_report_schemas import ConsolidatedReport, ExecutiveSummary
 from automation.utils.enterprise_reporter import EnterpriseReporter
 
 def test_enterprise_reporter_generation(tmp_path):

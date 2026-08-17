@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any
-from agents.schemas.llm_schema import LLMResponse
+from agents.infrastructure.schemas.llm_schema import LLMResponse
 
 class AIProvider(ABC):
     """

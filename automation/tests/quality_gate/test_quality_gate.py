@@ -3,7 +3,7 @@ import sys
 import pytest
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
-from agents.schemas.quality_gate_schemas import QualityGateInput, QualityGateDecision
+from agents.infrastructure.schemas.quality_gate_schemas import QualityGateInput, QualityGateDecision
 from automation.utils.quality_gate import QualityGateEvaluator
 
 def test_quality_gate_pass():

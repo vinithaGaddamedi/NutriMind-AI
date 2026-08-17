@@ -1,14 +1,14 @@
 import json
 from agents.base_agent import BaseAgent
-from agents.schemas.automation_schemas import PlannerInput, PlannerOutput
-from agents.gateway.ai_gateway import AIGateway
+from agents.infrastructure.schemas.automation_schemas import PlannerInput, PlannerOutput
+from agents.providers.ai_gateway import AIGateway
 
 class PlannerAgent(BaseAgent):
     """
     Answers: 'What should Playwright do to accomplish the approved test objective?'
     """
     def __init__(self):
-        super().__init__(name="PlannerAgent", role="Automation Test Planner")
+        super().__init__(agent_name="PlannerAgent")
         self.gateway = AIGateway()
 
     def execute(self, input_data: PlannerInput) -> PlannerOutput:

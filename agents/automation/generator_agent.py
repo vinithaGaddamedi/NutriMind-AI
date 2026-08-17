@@ -1,14 +1,14 @@
 import json
 from agents.base_agent import BaseAgent
-from agents.schemas.automation_schemas import GeneratorInput, GeneratorOutput
-from agents.gateway.ai_gateway import AIGateway
+from agents.infrastructure.schemas.automation_schemas import GeneratorInput, GeneratorOutput
+from agents.providers.ai_gateway import AIGateway
 
 class GeneratorAgent(BaseAgent):
     """
     Answers: 'How do we implement the plan as Playwright automation?'
     """
     def __init__(self):
-        super().__init__(name="GeneratorAgent", role="Playwright Automation Engineer")
+        super().__init__(agent_name="GeneratorAgent")
         self.gateway = AIGateway()
 
     def execute(self, input_data: GeneratorInput) -> GeneratorOutput:

@@ -1,8 +1,8 @@
 import pytest
 import requests
-from tests.ai.metrics.dietary_compliance import DietaryComplianceMetric
-from tests.ai.metrics.allergy_compliance import AllergyComplianceMetric
-from tests.ai.metrics.meal_plan_quality import MealPlanQualityMetric
+from automation.tests.ai.metrics.dietary_compliance import DietaryComplianceMetric
+from automation.tests.ai.metrics.allergy_compliance import AllergyComplianceMetric
+from automation.tests.ai.metrics.meal_plan_quality import MealPlanQualityMetric
 
 MEAL_API_URL = "http://localhost:8000/api/meal/meal-plan/single"
 
